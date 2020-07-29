@@ -1,18 +1,29 @@
 class Layer {
-  float i;
-  char s;
+  float scale;
+  char letter;
   boolean active;
-  color c;
-  PGraphics pg;
+  color colour;
+  //PGraphics pg;
 
-  Layer(char str, color cl) {
-    s = str;
-    i=1;
-    c = cl;
+  Layer(char l, color cl) {
+    letter = l;
+    scale=1;
+    colour = cl;
     active = false;
   }
 
-
+  float getScale(){
+    return scale;
+  }
+  
+  char getLetter(){
+    return letter;
+  }
+  
+  color getColour(){
+    return colour;
+  }
+  
   void show() {
     /*if (active) {
      //background(123);
@@ -24,32 +35,31 @@ class Layer {
      
      update();
      }*/
-    if (active) {
-      textAlign(CENTER, CENTER);
-      textSize(24);
-      scale(i);
-      fill(c);
-      text(s, 0, 0);
-      //println(width);
-      /*
+
+    textAlign(CENTER, CENTER);
+    textSize(24);
+    scale(scale);
+    fill(colour);
+    text(letter, 0, 0);
+    //println(width);
+    /*
       if(textWidth(s)*i>displayWidth){
-       
-       println("Reset of Layer: "+s);
-       reset();
-       }
-       else{
-       println("update");
-       update();
-       }
-       */
-      update();
-    }
+     
+     println("Reset of Layer: "+s);
+     reset();
+     }
+     else{
+     println("update");
+     update();
+     }
+     */
+    update();
   }
 
   void update() {
-    i=i*1.05;
+    scale=scale*1.05;
   }
   void reset() {
-    i=1;
+    scale=1;
   }
 }
