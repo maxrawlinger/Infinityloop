@@ -1,11 +1,12 @@
+ArrayList<Layer> layerList;
 color bgColor;
 String str;
-ArrayList<Layer> layerList;
-//ArrayList<PGraphics> graphiclayerList;
 int spacing;
 int layerAmount;
+boolean randomColor;
 //int screenWidth;
 //PFont font;
+//ArrayList<PGraphics> graphiclayerList;
 
 void setup() {
   size(800, 800, P3D);
@@ -19,8 +20,9 @@ void setup() {
   layerList = new ArrayList<Layer>();
   //font = createFont("hula.ttf", 24);
   //textFont(font);
-  spacing = 6;
+  spacing = 15;
   layerAmount = 4;
+  randomColor = true;
 
 
 
@@ -39,7 +41,6 @@ void draw() {
 
   for (int i = 0; i<layerAmount; i++) {
 
-
     if (i==0) {
 
       pushMatrix();
@@ -51,16 +52,20 @@ void draw() {
 
         pushMatrix();
         layerList.get(i).show();
+        rotate(PI/3.0);
         popMatrix();
 
         if (layerList.get(layerAmount-1).getScale()>spacing) {
 
           layerList.get(0).reset();
 
-          if ((layerList.get(0).getLetter() == ('T') || layerList.get(0).getLetter() ==('I'))) {
+          if ((layerList.get(0).getLetter() == ('T') || layerList.get(0).getLetter() ==('I') || layerList.get(0).getLetter() ==('N') || layerList.get(0).getLetter() ==('F')|| layerList.get(0).getLetter() ==('Y'))) {
             bgColor = layerList.get(0).getColour();
+            if (randomColor) {
+              layerList.get(0).setColour();
+            }
           }
-          
+
           layerList.add(layerList.get(0));
           layerList.remove(0);
         }

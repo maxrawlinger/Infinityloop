@@ -1,15 +1,14 @@
 class Layer {
   float scale;
   char letter;
-  boolean active;
   color colour;
+  float rotation;
   //PGraphics pg;
 
   Layer(char l, color cl) {
     letter = l;
     scale=1;
     colour = cl;
-    active = false;
   }
 
   float getScale(){
@@ -24,40 +23,24 @@ class Layer {
     return colour;
   }
   
+  void setColour(){
+    colour = color(random(255), random(255), random(255));
+  }
+  
   void show() {
-    /*if (active) {
-     //background(123);
-     textAlign(CENTER, CENTER);
-     textSize(24);
-     scale(i);
-     fill(c);
-     text(s, 0, 0);
-     
-     update();
-     }*/
 
     textAlign(CENTER, CENTER);
     textSize(24);
     scale(scale);
+    rotate(rotation);
     fill(colour);
-    text(letter, 0, 0);
-    //println(width);
-    /*
-      if(textWidth(s)*i>displayWidth){
-     
-     println("Reset of Layer: "+s);
-     reset();
-     }
-     else{
-     println("update");
-     update();
-     }
-     */
+    text(letter, 0, -2);
     update();
   }
 
   void update() {
     scale=scale*1.05;
+    rotation = rotation+0.05;
   }
   void reset() {
     scale=1;
