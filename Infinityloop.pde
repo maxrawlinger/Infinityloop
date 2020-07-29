@@ -4,6 +4,9 @@ String str;
 int spacing;
 int layerAmount;
 boolean randomColor;
+boolean activateRotation;
+float speed;
+boolean fade;
 //int screenWidth;
 //PFont font;
 //ArrayList<PGraphics> graphiclayerList;
@@ -16,27 +19,34 @@ void setup() {
   //arraylist because of pop and push
   //delete condition
   str = "INFINITYLOOP";
+  //str = "INFIN";
   //str = "teamhula";
   layerList = new ArrayList<Layer>();
   //font = createFont("hula.ttf", 24);
   //textFont(font);
   spacing = 15;
-  layerAmount = 4;
+  layerAmount = 3;
   randomColor = true;
+  speed = 1.02;
+  activateRotation = true;
+  fade = true;
+
 
 
 
 
   for (int i = 0; i< str.length(); i++) {
     //scale factor übergeben , mit minus init und kriterum für ab +scale
-    layerList.add(new Layer(str.charAt(i), color(random(255), random(255), random(255))));
+    layerList.add(new Layer(str.charAt(i), color(random(255), random(255), random(255)), speed, activateRotation));
 
     //createGraphics(40, 40);
   }
 }
 
 void draw() {
-  background(bgColor);
+  if (!fade) {
+    background(bgColor);
+  }
   translate(width/2, height/2);  
 
   for (int i = 0; i<layerAmount; i++) {
@@ -58,11 +68,12 @@ void draw() {
         if (layerList.get(layerAmount-1).getScale()>spacing) {
 
           layerList.get(0).reset();
-
-          if ((layerList.get(0).getLetter() == ('T') || layerList.get(0).getLetter() ==('I') || layerList.get(0).getLetter() ==('N') || layerList.get(0).getLetter() ==('F')|| layerList.get(0).getLetter() ==('Y'))) {
-            bgColor = layerList.get(0).getColour();
-            if (randomColor) {
-              layerList.get(0).setColour();
+          if (!fade) {
+            if ((layerList.get(0).getLetter() == ('T') || layerList.get(0).getLetter() ==('I') || layerList.get(0).getLetter() ==('N') || layerList.get(0).getLetter() ==('F')|| layerList.get(0).getLetter() ==('Y'))) {
+              bgColor = layerList.get(0).getColour();
+              if (randomColor) {
+                layerList.get(0).setColour();
+              }
             }
           }
 

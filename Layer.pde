@@ -3,43 +3,51 @@ class Layer {
   char letter;
   color colour;
   float rotation;
+  float speed;
+  boolean activeRotation;
   //PGraphics pg;
 
-  Layer(char l, color cl) {
+  Layer(char l, color cl, float s, boolean r) {
     letter = l;
     scale=1;
     colour = cl;
+    speed = s;
+    activeRotation = r;
+    rotation = rotation * random(-1, 1);
+    
   }
-
-  float getScale(){
+  
+  float getScale() {
     return scale;
   }
-  
-  char getLetter(){
+
+  char getLetter() {
     return letter;
   }
-  
-  color getColour(){
+
+  color getColour() {
     return colour;
   }
-  
-  void setColour(){
+
+  void setColour() {
     colour = color(random(255), random(255), random(255));
   }
-  
+
   void show() {
 
     textAlign(CENTER, CENTER);
     textSize(24);
     scale(scale);
-    rotate(rotation);
+    if (activeRotation) {
+      rotate(rotation);
+    }
     fill(colour);
     text(letter, 0, -2);
     update();
   }
 
   void update() {
-    scale=scale*1.05;
+    scale=scale*speed;
     rotation = rotation+0.05;
   }
   void reset() {
