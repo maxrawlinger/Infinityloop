@@ -5,6 +5,7 @@ class Layer {
   float rotation;
   float speed;
   boolean activeRotation;
+  int rotationDirection;
   //PGraphics pg;
 
   Layer(char l, color cl, float s, boolean r) {
@@ -13,8 +14,11 @@ class Layer {
     colour = cl;
     speed = s;
     activeRotation = r;
-    rotation = rotation * random(-1, 1);
+    rotationDirection = rand_signum();
     
+  }
+  int rand_signum() {
+    return random(-1, 1) >= 0 ? 1 : -1;
   }
   
   float getScale() {
@@ -34,13 +38,13 @@ class Layer {
   }
 
   void show() {
-
+    if (activeRotation) {
+      rotate(rotationDirection*rotation);
+    }
     textAlign(CENTER, CENTER);
     textSize(24);
     scale(scale);
-    if (activeRotation) {
-      rotate(rotation);
-    }
+    
     fill(colour);
     text(letter, 0, -2);
     update();
@@ -49,6 +53,7 @@ class Layer {
   void update() {
     scale=scale*speed;
     rotation = rotation+0.05;
+    speed=map(mouseX, 0, width, 1.02, 1.2);
   }
   void reset() {
     scale=1;

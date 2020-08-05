@@ -7,6 +7,7 @@ boolean randomColor;
 boolean activateRotation;
 float speed;
 boolean fade;
+int limit;
 //int screenWidth;
 //PFont font;
 //ArrayList<PGraphics> graphiclayerList;
@@ -24,12 +25,13 @@ void setup() {
   layerList = new ArrayList<Layer>();
   //font = createFont("hula.ttf", 24);
   //textFont(font);
-  spacing = 15;
-  layerAmount = 3;
+  spacing = 5;
+  layerAmount = 8;
   randomColor = true;
   speed = 1.02;
   activateRotation = true;
-  fade = true;
+  fade = false;
+  limit=200;
 
 
 
