@@ -13,7 +13,8 @@ int limit;
 //ArrayList<PGraphics> graphiclayerList;
 
 void setup() {
-  size(800, 800, P3D);
+  size(1000, 1000, P3D);
+  //fullScreen();
   background(255);
   smooth(8);
   textMode(SHAPE);
@@ -27,7 +28,7 @@ void setup() {
   //textFont(font);
   spacing = 5;
   layerAmount = 8;
-  randomColor = true;
+  randomColor = false;
   speed = 1.02;
   activateRotation = true;
   fade = false;
@@ -55,17 +56,12 @@ void draw() {
 
     if (i==0) {
 
-      pushMatrix();
-      layerList.get(i).show();
-      popMatrix();
+      printLetter(i);
     } else
 
       if (layerList.get(i-1).getScale()>spacing) {
 
-        pushMatrix();
-        layerList.get(i).show();
-        rotate(PI/3.0);
-        popMatrix();
+        printLetter(i);
 
         if (layerList.get(layerAmount-1).getScale()>spacing) {
 
@@ -84,53 +80,18 @@ void draw() {
         }
       }
   }
-  /*
+}
+void printLetter(int i) {
   pushMatrix();
-   //layerList.get(0).active=true;
-   layerList.get(0).show();
-   popMatrix();
-   
-   if (layerList.get(0).i>spacing) {
-   
-   pushMatrix();
-   //layerList.get(1).active=true;
-   layerList.get(1).show();
-   popMatrix();
-   }
-   
-   if (layerList.get(1).i>spacing) {
-   
-   pushMatrix();
-   //layerList.get(2).active=true;
-   layerList.get(2).show();
-   popMatrix();
-   }
-   //take color and hack into background
-   
-   
-   if (layerList.get(2).i>spacing)
-   { 
-   
-   pushMatrix();
-   //layerList.get(3).active=true;
-   layerList.get(3).show();
-   popMatrix();
-   //background nur setzen wenn pop buchstabe
-   
-   
-   layerList.get(0).reset();
-   if ((layerList.get(0).s == ('T') || layerList.get(0).s ==('I'))) {
-   c = layerList.get(0).c;
-   //background(c);
-   }
-   layerList.add(layerList.get(0));
-   layerList.remove(0);
-   }
-   */
+  layerList.get(i).show();
+  popMatrix();
 }
 
 void changeRotationMode() {
   activateRotation = !activateRotation;
+}
+void changeColorMode() {
+  randomColor = !randomColor;
 }
 void keyPressed() {
   switch(key) {
@@ -138,6 +99,11 @@ void keyPressed() {
   case 'r': 
     changeRotationMode();
     println("Rotation fixed:" + " " + !activateRotation); 
+    break;
+  
+  case 'c': 
+    changeColorMode();
+    println("Colormode active:" + " " + randomColor); 
     break;
   }
 }
