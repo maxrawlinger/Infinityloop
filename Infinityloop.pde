@@ -39,7 +39,7 @@ void setup() {
 
   for (int i = 0; i< str.length(); i++) {
     //scale factor übergeben , mit minus init und kriterum für ab +scale
-    layerList.add(new Layer(str.charAt(i), color(random(255), random(255), random(255)), speed, activateRotation));
+    layerList.add(new Layer(str.charAt(i), color(random(255), random(255), random(255)), speed));
 
     //createGraphics(40, 40);
   }
@@ -127,4 +127,17 @@ void draw() {
    layerList.remove(0);
    }
    */
+}
+
+void changeRotationMode() {
+  activateRotation = !activateRotation;
+}
+void keyPressed() {
+  switch(key) {
+
+  case 'r': 
+    changeRotationMode();
+    println("Rotation fixed:" + " " + !activateRotation); 
+    break;
+  }
 }
